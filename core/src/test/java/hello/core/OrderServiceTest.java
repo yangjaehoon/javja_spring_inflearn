@@ -13,6 +13,7 @@ import org.junit.jupiter.api.Test;
 public class OrderServiceTest {
     MemberService memberService = new MemberServiceImpl(null);
     OrderService orderService = new OrderServiceImpl(null,null);
+    //OrderService orderService = new OrderServiceImpl();
 
     @Test
     void createOrder() {
@@ -23,4 +24,5 @@ public class OrderServiceTest {
         Order order = orderService.createOrder(memberId, "itemA", 10000);
         Assertions.assertThat(order.getDiscountPrice()).isEqualTo(1000);
     }
+
 }
