@@ -24,13 +24,13 @@ public class MappingController {
         log.info("mappingGetV2");
         return "ok";
     }
-    @GetMapping("/mapping/{userId}}")
+    @GetMapping("/mapping/{userId}")
     public String mappingPath(@PathVariable("userId") String data){
         log.info("mappingPath userId = {}", data);
         return  "ok";
     }
 
-    @GetMapping("/mapping/udrs/{userId}/orders/{orderId}")
+    @GetMapping("/mapping/users/{userId}/orders/{orderId}")
     public String mappingPath(@PathVariable String userId, @PathVariable Long orderId){
         log.info("mappingPath userId={}, orderId={}", userId, orderId);
         return "ok";
