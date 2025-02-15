@@ -9,6 +9,8 @@ import org.springframework.mock.web.MockHttpServletResponse;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import static org.assertj.core.api.Assertions.assertThat;
+
 class SessionManagerTest {
 
     SessionManager sessionManager = new SessionManager();
@@ -25,6 +27,10 @@ class SessionManagerTest {
         request.setCookies(response.getCookies());
 
         Object result = sessionManager.getSession(request);
-        Assertions.assertThat(result).isEqualTo(member);
+        assertThat(result).isEqualTo(member);
+
+        sessionManager.expire(request);
+        Object expired = sessionManager.getSession(request);
+        assertThat(expired).isNull();
     }
 }
