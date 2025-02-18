@@ -23,13 +23,13 @@ public class LoginCheckFilter implements Filter {
 
         HttpServletResponse httpResponse = (HttpServletResponse) response;
 
-        try{
+        try {
             log.info("인증 체크 필터 시작{}", requestURI);
 
-            if(isLoginCheckPath(requestURI)) {
+            if (isLoginCheckPath(requestURI)) {
                 log.info("인증 체크 로직 실행 {}", requestURI);
                 HttpSession session = httpRequest.getSession(false);
-                if(session == null || session.getAttribute(SessionConst.LOGIN_MEMBER) == null) {
+                if (session == null || session.getAttribute(SessionConst.LOGIN_MEMBER) == null) {
                     log.info("미인증 사용자 요청 {}", requestURI);
                     //로그인으로 redirect
                     httpResponse.sendRedirect("/login?redirectURL=" + requestURI);
@@ -37,12 +37,16 @@ public class LoginCheckFilter implements Filter {
                 }
             }
 
-
+            chain.doFilter(request, response);
+        } catch (Exception e) {
+            throw e;
+        } finally {
+            log.info("인증 체크 필터 종료 {}", requestURI);
         }
     }
 
     //화이트 리스트이 경우 인증 체크 x
-    private boolean isLoginCheckPath(String requestURI){
+    private boolean isLoginCheckPath(String requestURI) {
         return !PatternMatchUtils.simpleMatch(whitelist, requestURI);
     }
 }
