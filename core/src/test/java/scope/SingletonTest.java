@@ -13,7 +13,7 @@ import static org.assertj.core.api.Assertions.*;
 public class SingletonTest {
 
     @Test
-    void singletonBeanFind(){
+    void singletonBeanFind() {
         AnnotationConfigApplicationContext ac = new AnnotationConfigApplicationContext(SingletonBean.class);
 
         SingletonBean singletonBean1 = ac.getBean(SingletonBean.class);
@@ -21,17 +21,19 @@ public class SingletonTest {
         System.out.println(singletonBean1);
         System.out.println(singletonBean2);
         assertThat(singletonBean1).isSameAs(singletonBean2);
+
+        ac.close();
     }
 
     @Scope("singleton")
-    static class SingletonBean{
+    static class SingletonBean {
         @PostConstruct
-        public void init(){
+        public void init() {
             System.out.println("SingletonBean.init");
         }
 
         @PreDestroy
-        public void destroy(){
+        public void destroy() {
             System.out.println("SingletonBean.destroy");
         }
     }
