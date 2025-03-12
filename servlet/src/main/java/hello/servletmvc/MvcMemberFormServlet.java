@@ -1,4 +1,4 @@
-package hello.servlet.web.servletmvc;
+package hello.servletmvc;
 
 import jakarta.servlet.RequestDispatcher;
 import jakarta.servlet.ServletException;
